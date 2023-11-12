@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: kubernetes
+    active: docker
   application:
     name: wiki-ingest-service
   cloud:
@@ -8,11 +8,11 @@ spring:
       bindings:
         output:
           binder: kafka
-          destination: wiki-recent-change
+          destination: ${WIKIMEDIA_TOPIC}
           contentType: 'application/json'
-          group: wiki-group
+          group: ${PRODUCER_GROUP}
           producer:
-            requiredGroups: wiki-group
+            requiredGroups: ${PRODUCER_GROUP}
 server:
   port: ${PORT:${SERVER_PORT:8100}}
 ---
@@ -30,7 +30,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: "PLAINTEXT://kafka:29092"
+          brokers: ${KAFKA_BROKERS} #"PLAINTEXT://kafka-0:29092"
 ---
 spring:
   profiles: kubernetes
