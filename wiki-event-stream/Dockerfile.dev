@@ -1,0 +1,26 @@
+# FROM openjdk:11.0.1-jre-slim-sid
+
+# CMD ["/usr/bin/java", "-jar", "/usr/share/myservice/myservice.jar"]
+
+# # Add the service itself
+# ARG JAR_FILE
+# COPY target/${JAR_FILE} /usr/share/myservice/myservice.jar
+
+
+# the first stage of our build will use a maven 3.6.1 parent image
+FROM maven:3.8.6-openjdk-11-slim AS MAVEN_BUILD
+
+WORKDIR /app
+# copy the pom and src code to the container
+COPY ./ ./
+
+# package our application code
+RUN mvn clean install -DskipTests
+
+FROM openjdk:11.0.1-jre-slim-sid
+
+# copy only the artifacts we need from the first stage and discard the rest
+COPY --from=MAVEN_BUILD /app/target/wiki-event-stream-0.0.2-SNAPSHOT.jar /app.jar
+EXPOSE 8100
+# set the startup command to execute the jar
+CMD ["java", "-jar", "/app.jar"]
