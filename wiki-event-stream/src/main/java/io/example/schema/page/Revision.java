@@ -28,13 +28,13 @@ public class Revision {
      */
     @JsonProperty("new")
     @JsonPropertyDescription("(rc_last_oldid)")
-    private Integer _new;
+    private Long _new;
     /**
      * (rc_this_oldid)
      */
     @JsonProperty("old")
     @JsonPropertyDescription("(rc_this_oldid)")
-    private Integer old;
+    private Long old;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -42,7 +42,7 @@ public class Revision {
      * (rc_last_oldid)
      */
     @JsonProperty("new")
-    public Integer getNew() {
+    public Long getNew() {
         return _new;
     }
 
@@ -50,7 +50,7 @@ public class Revision {
      * (rc_last_oldid)
      */
     @JsonProperty("new")
-    public void setNew(Integer _new) {
+    public void setNew(Long _new) {
         this._new = _new;
     }
 
@@ -58,7 +58,7 @@ public class Revision {
      * (rc_this_oldid)
      */
     @JsonProperty("old")
-    public Integer getOld() {
+    public Long getOld() {
         return old;
     }
 
@@ -66,7 +66,7 @@ public class Revision {
      * (rc_this_oldid)
      */
     @JsonProperty("old")
-    public void setOld(Integer old) {
+    public void setOld(Long old) {
         this.old = old;
     }
 

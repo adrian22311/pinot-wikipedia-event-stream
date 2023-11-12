@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class CategoryChange {
 
-    private Integer id;
+    private Long id;
     private String uri;
     private String title;
     private String category;
@@ -24,11 +24,11 @@ public class CategoryChange {
     public CategoryChange() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

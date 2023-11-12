@@ -66,7 +66,7 @@ public class RecentChange {
      */
     @JsonProperty("id")
     @JsonPropertyDescription("ID of the recentchange event (rcid).")
-    private Integer id;
+    private Long id;
     /**
      * Type of recentchange event (rc_type). One of "edit", "new", "log", "categorize", or "external". (See Manual:Recentchanges table#rc_type)
      */
@@ -174,7 +174,7 @@ public class RecentChange {
      */
     @JsonProperty("log_id")
     @JsonPropertyDescription("(rc_log_id)")
-    private Integer logId;
+    private Long logId;
     /**
      * (rc_log_type)
      */
@@ -238,7 +238,7 @@ public class RecentChange {
      * ID of the recentchange event (rcid).
      */
     @JsonProperty("id")
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -246,7 +246,7 @@ public class RecentChange {
      * ID of the recentchange event (rcid).
      */
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -510,7 +510,7 @@ public class RecentChange {
      * (rc_log_id)
      */
     @JsonProperty("log_id")
-    public Integer getLogId() {
+    public Long getLogId() {
         return logId;
     }
 
@@ -518,7 +518,7 @@ public class RecentChange {
      * (rc_log_id)
      */
     @JsonProperty("log_id")
-    public void setLogId(Integer logId) {
+    public void setLogId(Long logId) {
         this.logId = logId;
     }
 
