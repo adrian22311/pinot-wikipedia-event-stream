@@ -38,12 +38,12 @@ public class RecentChangeProcessor {
     private boolean running = false;
     private final Gson gson = new Gson();
     private final Wiki wiki = new Wiki.Builder().build();
-    private Long offset;
+    private String offset;
     private KafkaEvent[] lastEventId;
 
     public RecentChangeProcessor(Source messageBroker) {
         this.messageBroker = messageBroker;
-        this.offset = new Date().toInstant().atOffset(ZoneOffset.UTC).minusDays(1).toInstant().toEpochMilli();
+        this.offset = new Date().toInstant().atOffset(ZoneOffset.UTC).toString();
     }
 
     /**
@@ -123,7 +123,7 @@ public class RecentChangeProcessor {
      * @param recentChange is the {@link RecentChange} that should be joined with its categories
      */
     private void joinCategories(RecentChange recentChange) {
-        this.offset = recentChange.getMeta().getDt().toInstant().toEpochMilli();
+        this.offset = recentChange.getMeta().getDt().toInstant().toString();
         wiki.getCategoriesOnPage(recentChange.getTitle())
                 .stream()
                 .map(category -> CategoryChange.create(recentChange, category))
