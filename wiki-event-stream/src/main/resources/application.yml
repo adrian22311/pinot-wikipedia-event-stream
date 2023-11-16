@@ -13,6 +13,7 @@ spring:
           group: ${PRODUCER_GROUP}
           producer:
             requiredGroups: ${PRODUCER_GROUP}
+            compressionType: ${COMPRESSION_TYPE:none}
 server:
   port: ${PORT:${SERVER_PORT:8100}}
 ---

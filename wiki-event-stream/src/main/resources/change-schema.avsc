@@ -1,0 +1,63 @@
+{
+    "type": "record",
+    "name": "CategoryChange",
+    "namespace": "",
+    "fields": [
+        {
+            "name": "getId",
+            "type": "long"
+        },
+        {
+            "name": "getUri",
+            "type": "string"
+        },
+        {
+            "name": "getTitle",
+            "type": "string"
+        },
+        {
+            "name": "getCategory",
+            "type": "string"
+        },
+        {
+            "name": "getComment",
+            "type": "string"
+        },
+        {
+            "name": "getParsedComment",
+            "type": "string"
+        },
+        {
+            "name": "getUser",
+            "type": "string"
+        },
+        {
+            "name": "getDomain",
+            "type": "string"
+        },
+        {
+            "name": "getWiki",
+            "type": "string"
+        },
+        {
+            "name": "getType",
+            "type": "string"
+        },
+        {
+            "name": "getDateTime",
+            "type": "string"
+        },
+        {
+            "name": "getChangeLength",
+            "type": "int"
+        },
+        {
+            "name": "getUuid",
+            "type": "string"
+        },
+        {
+            "name": "getChangedTime",
+            "type": "long"
+        }
+    ]
+}
