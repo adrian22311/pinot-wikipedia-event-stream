@@ -21,6 +21,9 @@ import reactor.core.publisher.FluxSink;
 import java.time.Duration;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This processor receives Wikimedia change events that describe recent changes as they are happening live on Wikipedia.
@@ -124,10 +127,14 @@ public class RecentChangeProcessor {
      */
     private void joinCategories(RecentChange recentChange) {
         this.offset = recentChange.getMeta().getDt().toInstant().toString();
-        wiki.getCategoriesOnPage(recentChange.getTitle())
+        List<String> categories = wiki.getCategoriesOnPage(recentChange.getTitle())
                 .stream()
-                .map(category -> CategoryChange.create(recentChange, category))
-                .forEach(categorySink::next);
+                // .map(category -> CategoryChange.create(recentChange, category))
+                // .reduce(new ArrayList<CounterChain>(), (a,b) -> { b.setStartCounter(a.getEndCounter()); return b; })
+                // .forEach(categorySink::next);
+                .collect(Collectors.toList());
+
+        categorySink.next(CategoryChange.create(recentChange, categories));
     }
 
     /**

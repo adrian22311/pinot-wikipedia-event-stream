@@ -3,13 +3,15 @@ package io.example.schema.category;
 import io.example.schema.page.RecentChange;
 
 import java.util.Optional;
+import java.util.List;
 
 public class CategoryChange {
 
     private Long id;
     private String uri;
     private String title;
-    private String category;
+    // private String category;
+    private List<String> categories;
     private String comment;
     private String parsedComment;
     private String user;
@@ -48,12 +50,20 @@ public class CategoryChange {
         this.title = title;
     }
 
-    public String getCategory() {
-        return category;
+    // public String getCategory() {
+    //     return category;
+    // }
+
+    // public void setCategory(String category) {
+    //     this.category = category;
+    // }
+
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
     public String getComment() {
@@ -140,7 +150,30 @@ public class CategoryChange {
         CategoryChange categoryChange = new CategoryChange();
         categoryChange.setId(recentChange.getId());
         categoryChange.setTitle(recentChange.getTitle());
-        categoryChange.setCategory(category);
+        // categoryChange.setCategory(category);
+        categoryChange.setChangedTime(recentChange.getMeta().getDt().toInstant().toEpochMilli());
+        if (recentChange.getLength() != null)
+            categoryChange.setChangeLength(Optional.ofNullable(recentChange.getLength().getOld()).orElse(0) -
+                    Optional.ofNullable(recentChange.getLength().getNew()).orElse(0));
+        categoryChange.setComment(recentChange.getComment());
+        categoryChange.setDateTime(recentChange.getMeta().getDt().toString());
+        categoryChange.setDomain(recentChange.getMeta().getDomain());
+        categoryChange.setParsedComment(recentChange.getParsedcomment());
+        categoryChange.setType(recentChange.getType());
+        categoryChange.setUuid(recentChange.getMeta().getId());
+        categoryChange.setWiki(recentChange.getWiki());
+        categoryChange.setUser(recentChange.getUser());
+        categoryChange.setUri(recentChange.getMeta().getUri());
+
+        return categoryChange;
+    }
+
+    public static CategoryChange create(RecentChange recentChange, List<String> categories) {
+        CategoryChange categoryChange = new CategoryChange();
+        categoryChange.setId(recentChange.getId());
+        categoryChange.setTitle(recentChange.getTitle());
+        // categoryChange.setCategory(category);
+        categoryChange.setCategories(categories);
         categoryChange.setChangedTime(recentChange.getMeta().getDt().toInstant().toEpochMilli());
         if (recentChange.getLength() != null)
             categoryChange.setChangeLength(Optional.ofNullable(recentChange.getLength().getOld()).orElse(0) -
@@ -164,7 +197,7 @@ public class CategoryChange {
                 "id=" + id +
                 ", uri='" + uri + '\'' +
                 ", title='" + title + '\'' +
-                ", category='" + category + '\'' +
+                ", categories='" + categories + '\'' +
                 ", comment='" + comment + '\'' +
                 ", parsedComment='" + parsedComment + '\'' +
                 ", user='" + user + '\'' +
