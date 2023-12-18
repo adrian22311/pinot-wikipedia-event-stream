@@ -113,8 +113,8 @@ public class RecentChangeProcessor {
      * @return a boolean value indicating whether or not to filter out the recent change
      */
     private boolean applyFilter(RecentChange recentChange) {
-        return recentChange.getWiki().equals("enwiki") &&
-                recentChange.getType().equals("edit");
+        return "enwiki".equals(recentChange.getWiki()) &&
+                "edit".equals(recentChange.getType());
     }
 
     /**
